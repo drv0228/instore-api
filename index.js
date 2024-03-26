@@ -7,9 +7,10 @@ const knex = require("./knexfile.js");
 // require("dotenv").config();
 const PORT = 5050;
 
-// const cors = require("cors"); //this module enables Cross-Origin Resourse Sharing to allow different origins (domains) to access our server resources
+const cors = require("cors"); //this module enables Cross-Origin Resourse Sharing to allow different origins (domains) to access our server resources
 
-// app.use(cors()) enable cors, this configures the CORS middleware to allow requests from any origin (*)
+app.use(cors());  
+// enable cors, this configures the CORS middleware to allow requests from any origin (*)
 // app.use(
 //   cors({
 //     origin: "*",
