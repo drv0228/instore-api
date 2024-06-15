@@ -44,7 +44,7 @@ const add = (req, res) => {
           res.status(201).json(createdWarehouse);
         })
         .catch(() => {
-          res.status(500).json({ message: "Unable to create new user" });
+          res.status(500).json({ message: "Unable to create new store" });
         });
     } else {
       return res.status(400).json({

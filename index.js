@@ -4,18 +4,18 @@ const inventoryRoute = require("./routes/inventoryRoute.js");
 const warehousesRoute = require("./routes/warehousesRoute.js");
 const knex = require("./knexfile.js");
 
-// require("dotenv").config();
+require("dotenv").config();
 const PORT = 5050;
 
 const cors = require("cors"); //this module enables Cross-Origin Resourse Sharing to allow different origins (domains) to access our server resources
 
-app.use(cors());  
+// app.use(cors());  
 // enable cors, this configures the CORS middleware to allow requests from any origin (*)
-// app.use(
-//   cors({
-//     origin: "*",
-//   })
-// );
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 app.use(express.json());
 
 //This middleware parses incing JSON data from requests and makes it available in req.body for easy access.

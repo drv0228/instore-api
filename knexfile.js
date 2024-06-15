@@ -1,5 +1,5 @@
 // Import dotenv to process environment variables from `.env` file.
-// require("dotenv").config();
+require("dotenv").config();
 
 //Setting up database connection creating in knexfile.js
 module.exports = {

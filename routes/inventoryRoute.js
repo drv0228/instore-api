@@ -26,6 +26,6 @@ inventoryRoute.put("/:id", inventoriesPut.putSingleItem);
 inventoryRoute.delete("/:id", inventoriesDelete.remove);
 
 // inventories POST route for creating an inventory new item
-inventoryRoute.post("/", inventoriesPost.post);
+inventoryRoute.post("/", inventoriesPost.add);
 
 module.exports = inventoryRoute;

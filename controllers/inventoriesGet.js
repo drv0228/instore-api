@@ -40,9 +40,10 @@ const getSingleItem = (req, res) => {
           .status(404)
           .json({ message: `Inventory with ID: ${req.params.id} not found` });
       }
-      res.status(200).json(data);
+      res.status(200).json(data[0]);
     })
     .catch((err) => {
+      console.error(err);
       res
         .status(500)
         .json({
