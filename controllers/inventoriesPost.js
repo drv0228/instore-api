@@ -21,8 +21,6 @@ const add = (req, res) => {
             req.body.warehouse_id = warehouse.id;
             delete req.body.warehouse_name;
   console.log("Received data:", req.body);
-
-
   return knex("inventories").insert(req.body);
 })
 .then((result) => {
