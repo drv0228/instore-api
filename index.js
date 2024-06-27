@@ -5,7 +5,7 @@ const warehousesRoute = require("./routes/warehousesRoute.js");
 const knex = require("./knexfile.js");
 
 require("dotenv").config();
-const PORT = 5050;
+const PORT = process.env.PORT || 45520;
 
 const cors = require("cors"); //this module enables Cross-Origin Resourse Sharing to allow different origins (domains) to access our server resources
 
@@ -13,7 +13,7 @@ const cors = require("cors"); //this module enables Cross-Origin Resourse Sharin
 // enable cors, this configures the CORS middleware to allow requests from any origin (*)
 app.use(
   cors({
-    origin: "*",
+    origin: "https://mystore-inventory-mng.netlify.app",
   })
 );
 app.use(express.json());
@@ -30,7 +30,8 @@ app.get("/", (req, res) => {
   res.send("GET request to.. the server is running");
 });
 
-//start the server - listen for connection on the given path (all paths on port 8080)
+//start the server - listen for connection on the given path (all paths on port 5050)
 app.listen(PORT, () => {
   console.log(`Server running on PORT ${PORT}`);
 });
+
