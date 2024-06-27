@@ -11,11 +11,20 @@ const cors = require("cors"); //this module enables Cross-Origin Resourse Sharin
 
 // app.use(cors());  
 // enable cors, this configures the CORS middleware to allow requests from any origin (*)
-app.use(
-  cors({
-    origin: "*",
-  })
-);
+// app.use(
+//   cors({
+//     origin: "*",
+//   })
+// );
+app.use(cors({
+  origin: 'https://mystore-inventory-mng.netlify.app',
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+  allowedHeaders: ["Content-Type", "Authorization"],
+  exposedHeaders: ["Content-Range", "X-Content-Range"],
+}));
+
 app.use(express.json());
 
 //This middleware parses incing JSON data from requests and makes it available in req.body for easy access.
