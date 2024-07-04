@@ -23,6 +23,7 @@ module.exports = {
       user: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       charset: "utf8",
+      connectTimeout: 10000  
     },
   };
  
