@@ -1,29 +1,49 @@
-// Import dotenv to process environment variables from `.env` file.
 require("dotenv").config();
+const mysql = require('mysql');
 
-//Setting up database connection creating in knexfile.js locally
-// module.exports = {
-//   client: "mysql",
-//   connection: {
-//     host: "localhost",
-//     database: "instore",
-//     user: "root",
-//     password: "rootroot",
-//     charset: "utf8",
-//   },
-// };
+// Function to establish database connection with retry logic
+async function connectToDatabase() {
+    const connection = mysql.createConnection({
+        host: process.env.DB_HOST,
+        port: process.env.DB_PORT,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_NAME,
+        charset: "utf8",
+        connectTimeout: 10000
+    });
 
-// Setting up database connection creating in knexfile.js & using .env file
+    try {
+        await new Promise((resolve, reject) => {
+            connection.connect((err) => {
+                if (err) reject(err);
+                console.log('Connected to MySQL database successfully!');
+                resolve();
+            });
+        });
+    } catch (error) {
+        console.error('Error connecting to MySQL database:', error.message);
+        // Retry logic can be added here
+        // For example, wait for a period and then attempt to connect again
+        setTimeout(connectToDatabase, 5000); // Retry after 5 seconds
+    }
+
+    return connection;
+}
+
+// Export Knex configuration
 module.exports = {
     client: "mysql",
-    connection: {
-      host: process.env.DB_HOST,
-      port: process.env.DB_PORT,
-      database: process.env.DB_NAME,
-      user: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
-      charset: "utf8",
-      connectTimeout: 10000  
-    },
-  };
- 
+    connection: async function() {
+        let connection;
+        try {
+            connection = await connectToDatabase();
+        } catch (error) {
+            console.error('Failed to establish initial database connection:', error.message);
+            throw error;
+        }
+        return connection;
+    }
+};
+
+
