@@ -2,10 +2,12 @@ const express = require("express"); //create an express app, used to create a se
 const app = express(); //is an instance of express
 const inventoryRoute = require("./routes/inventoryRoute.js");
 const warehousesRoute = require("./routes/warehousesRoute.js");
-const knex = require("./knexfile.js");
+// const knex = require("./knexfile.js");
+const knexConfig = require("./knexfile.js");
+const knex = require("knex")(knexConfig);
 
 require("dotenv").config();
-const PORT = process.env.PORT || 45520;
+const PORT = process.env.PORT || 5050;
 
 const cors = require("cors"); //this module enables Cross-Origin Resourse Sharing to allow different origins (domains) to access our server resources
 
@@ -35,3 +37,10 @@ app.listen(PORT, () => {
   console.log(`Server running on PORT ${PORT}`);
 });
 
+knex.raw("SELECT 1")
+  .then(() => {
+    console.log("Database connected successfully");
+  })
+  .catch(err => {
+    console.error("Database connection failed", err);
+  });
