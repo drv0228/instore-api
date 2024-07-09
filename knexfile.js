@@ -10,7 +10,9 @@ async function connectToDatabase() {
         password: process.env.DB_PASSWORD,
         database: process.env.DB_NAME,
         charset: "utf8",
-        connectTimeout: 10000
+        connectTimeout: 10000,
+        timezone: 'UTC',
+        dateStrings: true
     });
 
     try {
@@ -45,5 +47,3 @@ module.exports = {
         return connection;
     }
 };
-
-

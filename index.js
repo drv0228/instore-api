@@ -7,7 +7,7 @@ const knexConfig = require("./knexfile.js");
 const knex = require("knex")(knexConfig);
 
 require("dotenv").config();
-const PORT = process.env.PORT || 5050;
+const PORT = process.env.PORT || 3000;
 
 const cors = require("cors"); //this module enables Cross-Origin Resourse Sharing to allow different origins (domains) to access our server resources
 
@@ -33,7 +33,7 @@ app.get("/", (req, res) => {
 });
 
 //start the server - listen for connection on the given path (all paths on port 5050)
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on PORT ${PORT}`);
 });
 
